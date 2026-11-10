@@ -113,17 +113,19 @@ def eliminar_servicio(request, id):
         servicio.delete()
         messages.success(request, "Servicio eliminado de la base de datos.")
     return redirect('administrar_servicios')
-
 def barberos(request):
-    lista = list(
-        coleccion_barberos.find({"disponible": True})
-    )
+   
+    lista = list(coleccion_barberos.find({"disponible": True}))
+    
+    total_disponibles = len(lista)
 
     return render(
         request,
         'barberia/barberos.html',
-        {'barberos': lista}
+        {
+            'barberos': lista,
+            'total_disponibles': total_disponibles
+        }
     )
-
 def contactos(request):
     return render(request, 'barberia/contactos.html')

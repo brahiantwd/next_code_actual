@@ -594,3 +594,208 @@ body {
 .contacto a:hover {
     text-decoration: underline;
 }
+
+
+
+
+h2 {
+    color: #ffffff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+p {
+    color: #9ca3af; 
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.05rem;
+    margin-bottom: 30px;
+}
+
+
+.tabla {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: #1e1e24;
+    border: 1px solid #2d2d34;
+    border-radius: 12px;
+    overflow: hidden; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tabla thead {
+    background-color: #252529; 
+}
+
+.tabla th {
+    color: #ffcc00; 
+    font-weight: 600;
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #2d2d34;
+}
+
+
+.tabla td {
+    color: #e2e8f0; 
+    padding: 16px 20px;
+    font-size: 1rem;
+    border-bottom: 1px solid #2d2d34;
+    vertical-align: middle;
+}
+
+
+.tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabla tbody tr {
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.tabla tbody tr:hover {
+    background-color: rgba(0, 122, 204, 0.08);
+    cursor: pointer;
+}
+
+.tabla td:last-child {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+
+.tabla td:contains("Disponible"), 
+.tabla tr td:last-child:not(:empty) {
+    color: #10b981; 
+}
+
+
+.tabla tr:has(td:contains("No disponible")) td:last-child,
+.tabla td:contains("No disponible") {
+    color: #ef4444; 
+}
+
+/* Contenedor General de la Sección */
+.seccion-cortes {
+    background-color: #121214; /* Fondo ultra oscuro */
+    padding: 60px 20px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Encabezado */
+.encabezado-cortes {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.titulo-dorado {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    /* Degradado dorado elegante */
+    background: linear-gradient(135deg, #ffe066 0%, #d4af37 50%, #aa7c11 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.subtitulo-cortes {
+    color: #a0aec0;
+    font-size: 1.1rem;
+}
+
+/* Grid Autoadaptable (Responsivo) */
+.grid-cortes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Tarjeta de Corte Individual */
+.tarjeta-corte {
+    background-color: #1e1e24; /* Gris oscuro del editor */
+    border: 1px solid #2d2d34;
+    border-radius: 16px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto hover: Brillo dorado y elevación */
+.tarjeta-corte:hover {
+    transform: translateY(-8px);
+    border-color: #d4af37; /* Borde dorado al pasar el cursor */
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+}
+
+/* Detalles de los Elementos Internos */
+.icono-corte {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 2px 5px rgba(212, 175, 55, 0.2));
+}
+
+.info-corte h3 {
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+}
+
+.info-corte p {
+    font-size: 0.95rem;
+    color: #a0aec0;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    min-height: 65px; /* Mantiene la alineación uniforme de las tarjetas */
+}
+
+/* Precio Destacado en Dorado */
+.precio-corte {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #d4af37; /* Oro corporativo */
+    margin-top: auto; /* Empuja el precio y el botón hacia abajo */
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* Botón de Reserva Premium */
+.btn-reserva {
+    background: transparent;
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-reserva:hover {
+    background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+    color: #121214; /* Invierte el color para legibilidad */
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}

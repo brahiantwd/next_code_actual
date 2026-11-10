@@ -1,12 +1,12 @@
 {% extends 'barberia/base.html' %}
-{% load static %} <!-- Cargamos static al inicio para poder usar la imagen -->
+{% load static %}
 
 {% block title %}
 Inicio - NexCodeBarber
 {% endblock %}
 
 {% block content %}
-<!-- Sección Hero Principal -->
+
 <section class="hero-section">
     <div class="hero-text-content">
         <h2 class="hero-title">
@@ -20,14 +20,14 @@ Inicio - NexCodeBarber
         </a>
     </div>
 
-    <!-- Bloque de la Imagen Dinámica -->
+   
     <div class="hero-image-content">
-        <!-- Llamamos a tu nueva imagen local y le aplicamos la clase hero-image -->
+       
         <img src="{% static 'barberia/imagenes/fachada_barberia.jpg' %}" alt="NexCodeBarber Fachada" class="hero-image">
     </div>
 </section>
 
-<!-- VENTANA EMERGENTE (MODAL) DEL CALENDARIO -->
+
 <div id="modal-calendario" class="modal-overlay">
     <div class="modal-container">
         <a href="#" class="modal-close">&times;</a>
@@ -61,4 +61,69 @@ Inicio - NexCodeBarber
         </form>
     </div>
 </div>
+
+<section class="seccion-cortes">
+    <div class="encabezado-cortes">
+        <h2 class="titulo-dorado">Nuestros Servicios y Cortes</h2>
+        <p class="subtitulo-cortes">Selecciona el estilo que mejor se adapta a ti con la calidad NextCode</p>
+    </div>
+
+    <div class="grid-cortes">
+        <!-- Corte 1 -->
+        <div class="tarjeta-corte">
+            <div class="icono-corte">💈</div>
+            <div class="info-corte">
+                <h3>Corte Clásico</h3>
+                <p>El estilo tradicional con tijera y máquina, acabado limpio y perfilado impecable.</p>
+            </div>
+            <div class="precio-corte">$25.000</div>
+            <button class="btn-reserva">Reservar</button>
+        </div>
+
+        <!-- Corte 2 -->
+        <div class="tarjeta-corte">
+            <div class="icono-corte">⚡</div>
+            <div class="info-corte">
+                <h3>Degradado / Fade</h3>
+                <p>Desvanecido perfecto (alto, medio o bajo) adaptado a las últimas tendencias urbanas.</p>
+            </div>
+            <div class="precio-corte">$30.000</div>
+            <button class="btn-reserva">Reservar</button>
+        </div>
+
+        <!-- Corte 3 -->
+        <div class="tarjeta-corte">
+            <div class="icono-corte">👑</div>
+            <div class="info-corte">
+                <h3>Corte NextCode VIP</h3>
+                <p>Corte premium con lavado, asesoría de imagen, mascarilla facial y masaje capilar.</p>
+            </div>
+            <div class="precio-corte">$50.000</div>
+            <button class="btn-reserva">Reservar</button>
+        </div>
+
+        <!-- Corte 4 -->
+        <div class="tarjeta-corte">
+            <div class="icono-corte">🧔</div>
+            <div class="info-corte">
+                <h3>Perfilado de Barba</h3>
+                <p>Diseño y rebaje de barba con ritual de toalla caliente y aceites hidratantes.</p>
+            </div>
+            <div class="precio-corte">$20.000</div>
+            <button class="btn-reserva">Reservar</button>
+        </div>
+
+        <!-- Corte 5 -->
+        <div class="tarjeta-corte">
+            <div class="icono-corte">🧒</div>
+            <div class="info-corte">
+                <h3>Corte Infantil</h3>
+                <p>Estilo y paciencia combinados para los más pequeños de la casa (menores de 12 años).</p>
+            </div>
+            <div class="precio-corte">$18.000</div>
+            <button class="btn-reserva">Reservar</button>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
