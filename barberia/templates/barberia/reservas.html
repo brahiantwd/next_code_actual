@@ -1,0 +1,70 @@
+{% extends 'barberia/base.html' %}
+
+{% block title %}Reservas{% endblock %}
+
+{% block content %}
+
+<div class="reservas">
+
+    <h1>Reservas semanales</h1>
+
+    <p class="semana">
+        Semana actual: {{ lunes }} al {{ sabado }}
+    </p>
+
+    <!-- Botones de los días -->
+
+    <div class="dias">
+
+        <form method="GET">
+            <button type="submit" name="dia" value="lunes">Lunes</button>
+            <button type="submit" name="dia" value="martes">Martes</button>
+            <button type="submit" name="dia" value="miercoles">Miércoles</button>
+            <button type="submit" name="dia" value="jueves">Jueves</button>
+            <button type="submit" name="dia" value="viernes">Viernes</button>
+            <button type="submit" name="dia" value="sabado">Sábado</button>
+        </form>
+
+    </div>
+
+    <!-- Tabla de reservas -->
+
+    <table class="tabla-reservas">
+
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Barbero</th>
+                <th>Servicio</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for reserva in reservas %}
+
+            <tr>
+                <td>{{ reserva.hora }}</td>
+                <td>{{ reserva.barbero }}</td>
+                <td>{{ reserva.servicio }}</td>
+                <td>{{ reserva.estado }}</td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="4">
+                    No hay reservas para este día.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

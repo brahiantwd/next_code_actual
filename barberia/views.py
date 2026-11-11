@@ -129,3 +129,43 @@ def barberos(request):
     )
 def contactos(request):
     return render(request, 'barberia/contactos.html')
+
+from django.shortcuts import render
+from datetime import date, timedelta
+
+def reservas(request):
+
+    # Obtener la fecha actual
+    hoy = date.today()
+
+    # Calcular el lunes de esta semana
+    lunes = hoy - timedelta(days=hoy.weekday())
+
+    # Calcular el sábado
+    sabado = lunes + timedelta(days=5)
+
+    # Obtener el día seleccionado
+    dia = request.GET.get('dia', 'lunes')
+
+    # Días de la semana
+    dias = {
+        'lunes': 0,
+        'martes': 1,
+        'miercoles': 2,
+        'jueves': 3,
+        'viernes': 4,
+        'sabado': 5
+    }
+
+    # Calcular la fecha del día seleccionado
+    fecha = lunes + timedelta(days=dias.get(dia, 0))
+
+    # Por ahora, lista vacía
+    reservas = []
+
+    return render(request, 'barberia/reservas.html', {
+        'reservas': reservas,
+        'lunes': lunes,
+        'sabado': sabado,
+        'dia': dia
+    })
