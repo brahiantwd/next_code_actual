@@ -15,14 +15,17 @@ Inicio - NexCodeBarber
         <p class="hero-description">
             En NexCodeBarber combinamos experiencia, estilo y pasión para que luzcas tu mejor versión.
         </p>
-        <a href="#modal-calendario" class="btn-reserve">
+
+        <a href="{% url 'administrar_servicios' %}" class="btn-reserve">
             Reservar cita <span>📅</span>
         </a>
+
+
     </div>
 
-   
+
     <div class="hero-image-content">
-       
+
         <img src="{% static 'barberia/imagenes/fachada_barberia.jpg' %}" alt="NexCodeBarber Fachada" class="hero-image">
     </div>
 </section>
@@ -31,23 +34,23 @@ Inicio - NexCodeBarber
 <div id="modal-calendario" class="modal-overlay">
     <div class="modal-container">
         <a href="#" class="modal-close">&times;</a>
-        
+
         <h3 class="modal-title">Agenda tu Cita</h3>
         <p class="modal-subtitle">Selecciona el momento perfecto para tu estilo</p>
-        
+
         <form method="POST" class="modal-form">
             {% csrf_token %}
-            
+
             <div class="form-group">
                 <label>Fecha de la cita:</label>
                 <input type="date" required class="form-input">
             </div>
-            
+
             <div class="form-group">
                 <label>Hora disponible:</label>
                 <input type="time" required class="form-input">
             </div>
-            
+
             <div class="form-group">
                 <label>Servicio:</label>
                 <select class="form-input">
@@ -56,74 +59,99 @@ Inicio - NexCodeBarber
                     <option value="combo">Combo NexCode (Corte + Barba)</option>
                 </select>
             </div>
-            
+
             <button type="submit" class="btn-submit">Confirmar Reserva</button>
         </form>
     </div>
 </div>
 
-<section class="seccion-cortes">
+
+<section class="seccion-cortes" id="servicios">
     <div class="encabezado-cortes">
-        <h2 class="titulo-dorado">Nuestros Servicios y Cortes</h2>
-        <p class="subtitulo-cortes">Selecciona el estilo que mejor se adapta a ti con la calidad NextCode</p>
-    </div>
+        <h2 class="titulo-dorado">NUESTROS SERVICIOS Y CORTES</h2>
+        ...
 
-    <div class="grid-cortes">
-        <!-- Corte 1 -->
-        <div class="tarjeta-corte">
-            <div class="icono-corte">💈</div>
-            <div class="info-corte">
-                <h3>Corte Clásico</h3>
-                <p>El estilo tradicional con tijera y máquina, acabado limpio y perfilado impecable.</p>
-            </div>
-            <div class="precio-corte">$25.000</div>
-            <button class="btn-reserva">Reservar</button>
-        </div>
 
-        <!-- Corte 2 -->
-        <div class="tarjeta-corte">
-            <div class="icono-corte">⚡</div>
-            <div class="info-corte">
-                <h3>Degradado / Fade</h3>
-                <p>Desvanecido perfecto (alto, medio o bajo) adaptado a las últimas tendencias urbanas.</p>
-            </div>
-            <div class="precio-corte">$30.000</div>
-            <button class="btn-reserva">Reservar</button>
-        </div>
+        <div class="grid-cortes">
+            <div class="tarjeta-corte">
+                <div class="icono-corte">⚡</div>
+                <div class="info-corte">
+                    <h3>Mohitaper</h3>
+                    <img src="{% static 'barberia/imagenes/mohitaper-3-731x1024.jpg' %}" alt="Corte Mohicano"
+                        class="img-corte">
+                    <p>Exactamente igual que el “Táper Fade” pero con el degradado de la patilla algo más expandido
+                        alrededor de la oreja, es decir parecido al “burst fade”.</p>
 
-        <!-- Corte 3 -->
-        <div class="tarjeta-corte">
-            <div class="icono-corte">👑</div>
-            <div class="info-corte">
-                <h3>Corte NextCode VIP</h3>
-                <p>Corte premium con lavado, asesoría de imagen, mascarilla facial y masaje capilar.</p>
-            </div>
-            <div class="precio-corte">$50.000</div>
-            <button class="btn-reserva">Reservar</button>
-        </div>
+                </div>
 
-        <!-- Corte 4 -->
-        <div class="tarjeta-corte">
-            <div class="icono-corte">🧔</div>
-            <div class="info-corte">
-                <h3>Perfilado de Barba</h3>
-                <p>Diseño y rebaje de barba con ritual de toalla caliente y aceites hidratantes.</p>
+                <div class="precio-corte">$25.000</div>
             </div>
-            <div class="precio-corte">$20.000</div>
-            <button class="btn-reserva">Reservar</button>
-        </div>
 
-        <!-- Corte 5 -->
-        <div class="tarjeta-corte">
-            <div class="icono-corte">🧒</div>
-            <div class="info-corte">
-                <h3>Corte Infantil</h3>
-                <p>Estilo y paciencia combinados para los más pequeños de la casa (menores de 12 años).</p>
+
+            <div class="tarjeta-corte">
+                <div class="icono-corte">💈</div>
+                <div class="info-corte">
+                    <h3>Mohicano</h3>
+                    <img src="{% static 'barberia/imagenes/mohicano-2.jpg' %}" alt="Degradado Fade" class="img-corte">
+                    <p>En ocasiones a los “mullet” o a los “burst fade” que también son diferentes tipos de cresta, se
+                        les llama incorrectamente: mohicano/a
+                        Realmente el mohicano auténtico se caracteriza porque la parte de atrás, se estrecha más hacia
+                        el centro. Por tanto, nada que ver con las crestas anteriores.</p>
+
+                </div>
+
+                <div class="precio-corte">$30.000</div>
+
             </div>
-            <div class="precio-corte">$18.000</div>
-            <button class="btn-reserva">Reservar</button>
+
+            <div class="tarjeta-corte">
+                <div class="icono-corte">👑</div>
+                <div class="info-corte">
+                    <h3>Mullet</h3>
+                    <img src="{% static 'barberia/imagenes/mullet.jpg' %}" alt="Servicio VIP" class="img-corte">
+                    <p>En ocasiones a los “mullet” o a los “burst fade” que también son diferentes tipos de cresta, se
+                        les llama incorrectamente: mohicano/a.
+
+                        Realmente el mohicano auténtico se caracteriza porque la parte de atrás, se estrecha más hacia
+                        el centro. Por tanto, nada que ver con las crestas anteriores.</p>
+
+                </div>
+                <div class="precio-corte">$50.000</div>
+
+            </div>
+
+
+            <div class="tarjeta-corte">
+                <div class="icono-corte">🧔</div>
+                <div class="info-corte">
+                    <h3>Cesar</h3>
+                    <img src="{% static 'barberia/imagenes/cesar.jpg' %}" alt="Perfilado de Barba" class="img-corte">
+                    <p>Sí, por César, lo primero que viene a la cabeza es un corte con flequillo como el histórico
+                        emperador romano. Y esa es su inspiración actual solo que con mucha textura.
+
+                        Un corte que puedes llevar con el flequillo recto y colocado, despuntado, despeinado, de lado…
+                        No pienses que es un estilo estático porque realmente permite diferentes peinados.</p>
+                </div>
+                <div class="precio-corte">$20.000</div>
+
+            </div>
+
+            <div class="tarjeta-corte">
+                <div class="icono-corte">✂️</div>
+                <div class="info-corte">
+                    <h3>Corte Clásico</h3>
+                    <img src="{% static 'barberia/imagenes/buzz-cut.jpg' %}" alt="Corte Clásico" class="img-corte">
+                    <p>odemos adornar el nombre pero ciertamente es un corte rapado de toda la vida. Concretamente un
+                        cero muy difuminado y arriba generalmente al 2 ó 3.
+
+                        Entre nuestros clientes suele haber diferentes excusas para raparse: desengaño amoroso,
+                        comodidad, cambio drástico, apuesta grupal entre amigos o por calor..</p>
+
+                </div>
+                <div class="precio-corte">$18.000</div>
+
+            </div>
         </div>
-    </div>
 </section>
 
 {% endblock %}
