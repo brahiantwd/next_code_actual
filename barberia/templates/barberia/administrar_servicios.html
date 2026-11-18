@@ -6,7 +6,7 @@
 <div style="max-width: 1000px; margin: 40px auto; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #fff;">
     
     <h1 style="color: #ffcc00; border-bottom: 2px solid #ffcc00; padding-bottom: 10px; margin-bottom: 30px;">
-        Administrar Servicios del Sistema
+        Dinos que servicio quieres reservar
     </h1>
 
     <!-- Sección de Mensajes de Django -->
@@ -30,19 +30,40 @@
                 <input type="text" name="nombre" required style="width: 100%; padding: 10px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;">
             </div>
 
+            <!-- Lista Desplegable de Servicios -->
             <div>
-                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc;">Descripción:</label>
-                <input type="text" name="descripcion" required style="width: 100%; padding: 10px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;">
+                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc;">Servicio:</label>
+                <select name="descripcion" id="servicioSelect" required style="width: 100%; padding: 10px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;">
+                    <option value="" selected disabled>-- Seleccionar Servicio --</option>
+                    <option value="corte de cabello">corte de cabello - $20.000</option>
+                    <option value="barba">barba - $15.000</option>
+                    <option value="corte + barba">corte + barba - $30.000</option>
+                    <option value="corte infantil">corte infantil - $18.000</option>
+                </select>
             </div>
 
+            <!-- Entrada de Fecha con Selector / Calendario -->
             <div>
-                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc;">Precio ($):</label>
-                <input type="number" name="precio" min="0" step="0.01" required style="width: 100%; padding: 10px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;">
+                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc;">Fecha:</label>
+                <input type="date" id="fechaInput" name="fecha" required style="width: 100%; padding: 10px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box; color-scheme: dark;">
             </div>
 
+            <!-- Lista Desplegable de Barberos -->
             <div>
-                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc;">Duración (min):</label>
-                <input type="number" name="duracion" min="1" required style="width: 100%; padding: 10px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;">
+                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc;">Barberos contratados:</label>
+                <select name="barbero" required onchange="validarDisponibilidad(this)" style="width: 100%; padding: 10px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;">
+                    <option value="" selected disabled>-- Seleccionar Barbero --</option>
+                    {% for barbero in barberos %}
+                        <option value="{{ barbero.nombre }}" data-disponible="{{ barbero.disponible|yesno:'true,false' }}">
+                            {{ barbero.nombre }} {% if not barbero.disponible %}(No disponible){% endif %}
+                        </option>
+                    {% empty %}
+                        <option value="Juan Pérez" data-disponible="true">Juan Pérez</option>
+                        <option value="Carlos Gómez" data-disponible="true">Carlos Gómez</option>
+                        <option value="Andrés Ramírez" data-disponible="true">Andrés Ramírez</option>
+                        <option value="David Torres" data-disponible="false">David Torres (No disponible)</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div style="grid-column: 1 / -1; text-align: right; margin-top: 10px;">
@@ -62,8 +83,8 @@
                     <th style="padding: 12px 15px;">ID</th>
                     <th style="padding: 12px 15px;">Nombre</th>
                     <th style="padding: 12px 15px;">Descripción</th>
-                    <th style="padding: 12px 15px;">Precio</th>
-                    <th style="padding: 12px 15px;">Duración</th>
+                    <th style="padding: 12px 15px;">Fecha</th>
+                    <th style="padding: 12px 15px;">Barbero Asignado</th>
                     <th style="padding: 12px 15px; text-align: center;">Acciones</th>
                 </tr>
             </thead>
@@ -73,8 +94,8 @@
                     <td style="padding: 12px 15px; color: #999;">{{ servicio.PK_idServicio }}</td>
                     <td style="padding: 12px 15px; font-weight: bold;">{{ servicio.UK_servicios_nombre }}</td>
                     <td style="padding: 12px 15px; color: #ccc;">{{ servicio.descripcion }}</td>
-                    <td style="padding: 12px 15px; color: #ffcc00; font-weight: bold;">${{ servicio.precio }}</td>
-                    <td style="padding: 12px 15px;">{{ servicio.duracion }} min</td>
+                    <td style="padding: 12px 15px; color: #ffcc00; font-weight: bold;">{{ servicio.fecha|default:"N/A" }}</td>
+                    <td style="padding: 12px 15px; color: #ccc;">{{ servicio.barbero|default:"Juan Pérez" }}</td>
                     <td style="padding: 12px 15px; display: flex; gap: 10px; justify-content: center; align-items: center;">
                         <a href="{% url 'editar_servicio' servicio.PK_idServicio %}" style="background: #17a2b8; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
                             Editar
@@ -99,5 +120,18 @@
     </div>
 
 </div>
-{% endblock %}
 
+<!-- Scripts de interacción -->
+<script>
+// Alerta de disponibilidad para barberos
+function validarDisponibilidad(selectElement) {
+    const opcion = selectElement.options[selectElement.selectedIndex];
+    const disponible = opcion.getAttribute('data-disponible');
+
+    if (disponible === 'false') {
+        alert("El barbero seleccionado no está disponible en este momento. Puedes ir al área de barberos para consultar quiénes están disponibles.");
+        selectElement.value = ""; 
+    }
+}
+</script>
+{% endblock %}
