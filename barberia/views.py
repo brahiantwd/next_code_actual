@@ -61,9 +61,9 @@ def administrar_servicios(request):
     if request.method == 'POST':
         # Capturamos todos los campos enviados desde la plantilla HTML
         nombre_form = request.POST.get('nombre')
-        descripcion_form = request.POST.get('descripcion')  # Trae el tipo de servicio seleccionado
-        fecha_form = request.POST.get('fecha')              # Trae la fecha del calendario
-        barbero_form = request.POST.get('barbero')          # Trae el barbero elegido
+        descripcion_form = request.POST.get('descripcion')
+        fecha_form = request.POST.get('fecha')
+        barbero_form = request.POST.get('barbero')
 
         try:
             # Crea y guarda el nuevo registro en la base de datos
@@ -76,18 +76,21 @@ def administrar_servicios(request):
             messages.success(request, "¡Servicio reservado con éxito!")
         except Exception as e:
             messages.error(request, f"Error al procesar la reserva: {e}")
-            
+
         return redirect('administrar_servicios')
 
     # Obtenemos todos los servicios/reservas registrados para listar en la tabla
     todos_los_servicios = Servicio.objects.all()
-    
-    # Obtenemos la lista de barberos desde MongoDB
-    lista_barberos = list(coleccion_barberos.find({}))
+
+    try:
+        # Obtenemos la lista de barberos desde MongoDB
+        lista_barberos = list(coleccion_barberos.find({}))
+    except Exception:
+        lista_barberos = []
 
     return render(
-        request, 
-        'barberia/administrar_servicios.html', 
+        request,
+        'barberia/administrar_servicios.html',
         {
             'servicios': todos_los_servicios,
             'barberos': lista_barberos
@@ -119,7 +122,11 @@ def eliminar_servicio(request, id):
 
 
 def barberos(request):
-    lista = list(coleccion_barberos.find({"disponible": True}))
+    try:
+        lista = list(coleccion_barberos.find({"disponible": True}))
+    except Exception:
+        lista = []
+
     total_disponibles = len(lista)
 
     return render(
